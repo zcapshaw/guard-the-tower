@@ -44,22 +44,6 @@ const IndexPage = () => {
   const [ethPrice, setEthPrice] = useState(0);
   const [mintCost, setMintCost] = useState("-");
 
-  // fetch data from airtable
-  const queryResults = useStaticQuery(graphql`
-    query fetchData {
-      allAirtable(sort: { order: ASC, fields: id }, limit: 1) {
-        edges {
-          node {
-            data {
-              timestamp
-              wizard_floor
-            }
-          }
-        }
-      }
-    }
-  `);
-
   // fetch price data from CoinGecko API
   useEffect(() => {
     // fetch ETH and $GP price
@@ -70,11 +54,27 @@ const IndexPage = () => {
       .then((resultData) => {
         setEthPrice(resultData[0].current_price);
         setGpPrice(resultData[1].current_price);
-        setGpDisplayPrice(gpPrice.toFixed(3));
+        // error handling if the api fails to return
+        if (gpPrice != "-") {
+          setGpDisplayPrice(gpPrice.toFixed(3));
+        }
       });
 
     // set the cost to mint a wizard based on current ETH and GP prices
     setMintCost(calculateMintCost(ethPrice, gpPrice));
+  }, []);
+
+  // fetch opensea floor
+  useEffect(() => {
+    // fetch ETH and $GP price
+    fetch(
+      `https://api.opensea.io/api/v1/collection/wizards-dragons-game-v2/stats`
+    )
+      .then((response) => response.json()) // parse JSON from request
+      .then((resultData) => {
+        // console.log(resultData.stats.floor_price);
+        setFloorPrice(resultData.stats.floor_price);
+      });
   }, []);
 
   const calculateMintCost = (ethPrice, gpPrice) => {
@@ -82,13 +82,6 @@ const IndexPage = () => {
     const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
     return mintCost.toFixed(2);
   };
-
-  //update state from queryResults
-  useEffect((gpPrice) => {
-    const data = queryResults.allAirtable.edges[0].node.data;
-    console.log(data);
-    setFloorPrice(data.wizard_floor);
-  }, []);
 
   return (
     <Layout pageTitle="!guard">
