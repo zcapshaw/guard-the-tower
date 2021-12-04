@@ -48,21 +48,33 @@ const IndexPage = () => {
   useEffect(() => {
     // fetch ETH and $GP price
     fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20wizards-and-dragons&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20wizards-and-dragons&order=market_cap_desc`
     )
-      .then((response) => response.json()) // parse JSON from request
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
       .then((resultData) => {
+        console.log(resultData);
         setEthPrice(resultData[0].current_price);
         setGpPrice(resultData[1].current_price);
         // error handling if the api fails to return
         if (gpPrice != "-") {
           setGpDisplayPrice(gpPrice.toFixed(3));
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
 
     // set the cost to mint a wizard based on current ETH and GP prices
     setMintCost(calculateMintCost(ethPrice, gpPrice));
-  }, []);
+    console.log(gpPrice, ethPrice);
+  }, [gpPrice, ethPrice]);
 
   // fetch opensea floor
   useEffect(() => {
