@@ -49,8 +49,6 @@ const IndexPage = () => {
         edges {
           node {
             data {
-              gp_price_usd
-              price_of_eth
               timestamp
               wizard_floor
             }
@@ -60,6 +58,32 @@ const IndexPage = () => {
     }
   `);
 
+  // fetch price data from CoinGecko API
+  useEffect(() => {
+    // fetch $GP price
+    fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=wizards-and-dragons&vs_currencies=usd`
+    )
+      .then((response) => response.json()) // parse JSON from request
+      .then((resultData) => {
+        // console.log(resultData["wizards-and-dragons"].usd.toFixed(3));
+        setGpPrice(resultData["wizards-and-dragons"].usd.toFixed(3));
+      });
+
+    // fetch ETH price
+    fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`
+    )
+      .then((response) => response.json()) // parse JSON from request
+      .then((resultData) => {
+        // console.log(Math.round(resultData.ethereum.usd));
+        setEthPrice(Math.round(resultData.ethereum.usd));
+      });
+
+    // set the cost to mint a wizard based on current ETH and GP prices
+    setMintCost(calculateMintCost(ethPrice, gpPrice));
+  }, []);
+
   const calculateMintCost = (ethPrice, gpPrice) => {
     const gpPricePerMint = 36000;
     const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
@@ -67,12 +91,10 @@ const IndexPage = () => {
   };
 
   //update state from queryResults
-  useEffect(() => {
+  useEffect((gpPrice) => {
     const data = queryResults.allAirtable.edges[0].node.data;
     console.log(data);
     setFloorPrice(data.wizard_floor);
-    setGpPrice(data.gp_price_usd);
-    setMintCost(calculateMintCost(data.price_of_eth, data.gp_price_usd));
   }, []);
 
   return (
