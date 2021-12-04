@@ -6,9 +6,18 @@ module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
     title: "guard-the-tower",
+    description: "A dashboard for the Wizards and Dragons Game",
   },
   plugins: [
-    "gatsby-plugin-styled-components",
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Guard the Tower`,
+        short_name: `!guard`,
+        start_url: `/`,
+        icon: `src/images/wizard.png`,
+      },
+    },
     {
       resolve: "gatsby-source-airtable",
       options: {

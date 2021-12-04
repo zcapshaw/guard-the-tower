@@ -4,6 +4,7 @@ import "@fontsource/press-start-2p";
 import Layout from "../components/layout";
 import DataCard from "../components/data-card";
 import Footer from "../components/footer";
+import ChartIframe from "../components/chart-iframe";
 
 // styles
 const pageStyles = {
@@ -26,7 +27,7 @@ const containerStyles = {
 
 const emojiStyles = {
   fontSize: 50,
-  marginBottom: 80,
+  marginBottom: 24,
 };
 
 const wrapperStyles = {
@@ -39,41 +40,48 @@ const wrapperStyles = {
 const IndexPage = () => {
   const [floorPrice, setFloorPrice] = useState("-");
   const [gpPrice, setGpPrice] = useState("-");
+  const [gpDisplayPrice, setGpDisplayPrice] = useState("-");
   const [ethPrice, setEthPrice] = useState(0);
   const [mintCost, setMintCost] = useState("-");
 
-  // fetch data from airtable
-  const queryResults = useStaticQuery(graphql`
-    query fetchData {
-      allAirtable(sort: { order: ASC, fields: id }, limit: 1) {
-        edges {
-          node {
-            data {
-              gp_price_usd
-              price_of_eth
-              timestamp
-              wizard_floor
-            }
-          }
+  // fetch price data from CoinGecko API
+  useEffect(() => {
+    // fetch ETH and $GP price
+    fetch(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20wizards-and-dragons&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+    )
+      .then((response) => response.json()) // parse JSON from request
+      .then((resultData) => {
+        setEthPrice(resultData[0].current_price);
+        setGpPrice(resultData[1].current_price);
+        // error handling if the api fails to return
+        if (gpPrice != "-") {
+          setGpDisplayPrice(gpPrice.toFixed(3));
         }
-      }
-    }
-  `);
+      });
+
+    // set the cost to mint a wizard based on current ETH and GP prices
+    setMintCost(calculateMintCost(ethPrice, gpPrice));
+  }, []);
+
+  // fetch opensea floor
+  useEffect(() => {
+    // fetch ETH and $GP price
+    fetch(
+      `https://api.opensea.io/api/v1/collection/wizards-dragons-game-v2/stats`
+    )
+      .then((response) => response.json()) // parse JSON from request
+      .then((resultData) => {
+        // console.log(resultData.stats.floor_price);
+        setFloorPrice(resultData.stats.floor_price);
+      });
+  }, []);
 
   const calculateMintCost = (ethPrice, gpPrice) => {
     const gpPricePerMint = 36000;
     const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
     return mintCost.toFixed(2);
   };
-
-  //update state from queryResults
-  useEffect(() => {
-    const data = queryResults.allAirtable.edges[0].node.data;
-    console.log(data);
-    setFloorPrice(data.wizard_floor);
-    setGpPrice(data.gp_price_usd);
-    setMintCost(calculateMintCost(data.price_of_eth, data.gp_price_usd));
-  }, []);
 
   return (
     <Layout pageTitle="!guard">
@@ -99,12 +107,13 @@ const IndexPage = () => {
         />
         <DataCard
           title="Price of $GP"
-          number={gpPrice}
+          number={gpDisplayPrice}
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
         />
       </div>
+      <ChartIframe />
       <Footer />
     </Layout>
   );

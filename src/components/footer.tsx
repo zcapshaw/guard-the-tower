@@ -2,10 +2,7 @@ import React from "react";
 
 const containerStyles = {
   textAlign: "center",
-  position: "absolute",
-  bottom: 75,
-  height: "2.5rem",
-  width: "100%",
+  marginTop: "5rem",
 };
 
 const linkStyles = {
