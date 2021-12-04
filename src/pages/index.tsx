@@ -4,6 +4,7 @@ import "@fontsource/press-start-2p";
 import Layout from "../components/layout";
 import DataCard from "../components/data-card";
 import Footer from "../components/footer";
+import ChartIframe from "../components/chart-iframe";
 
 // styles
 const pageStyles = {
@@ -26,7 +27,7 @@ const containerStyles = {
 
 const emojiStyles = {
   fontSize: 50,
-  marginBottom: 80,
+  marginBottom: 64,
 };
 
 const wrapperStyles = {
@@ -67,7 +68,7 @@ const IndexPage = () => {
       .then((response) => response.json()) // parse JSON from request
       .then((resultData) => {
         // console.log(resultData["wizards-and-dragons"].usd.toFixed(3));
-        setGpPrice(resultData["wizards-and-dragons"].usd.toFixed(3));
+        setGpPrice(resultData["wizards-and-dragons"].usd);
       });
 
     // fetch ETH price
@@ -121,12 +122,13 @@ const IndexPage = () => {
         />
         <DataCard
           title="Price of $GP"
-          number={gpPrice}
+          number={gpPrice.toFixed(3)}
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
         />
       </div>
+      <ChartIframe />
       <Footer />
     </Layout>
   );
