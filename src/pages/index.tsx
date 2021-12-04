@@ -27,7 +27,7 @@ const containerStyles = {
 
 const emojiStyles = {
   fontSize: 50,
-  marginBottom: 64,
+  marginBottom: 24,
 };
 
 const wrapperStyles = {
@@ -40,6 +40,7 @@ const wrapperStyles = {
 const IndexPage = () => {
   const [floorPrice, setFloorPrice] = useState("-");
   const [gpPrice, setGpPrice] = useState("-");
+  const [gpDisplayPrice, setGpDisplayPrice] = useState("-");
   const [ethPrice, setEthPrice] = useState(0);
   const [mintCost, setMintCost] = useState("-");
 
@@ -61,24 +62,15 @@ const IndexPage = () => {
 
   // fetch price data from CoinGecko API
   useEffect(() => {
-    // fetch $GP price
+    // fetch ETH and $GP price
     fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=wizards-and-dragons&vs_currencies=usd`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20wizards-and-dragons&order=market_cap_desc&per_page=100&page=1&sparkline=false`
     )
       .then((response) => response.json()) // parse JSON from request
       .then((resultData) => {
-        // console.log(resultData["wizards-and-dragons"].usd.toFixed(3));
-        setGpPrice(resultData["wizards-and-dragons"].usd);
-      });
-
-    // fetch ETH price
-    fetch(
-      `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`
-    )
-      .then((response) => response.json()) // parse JSON from request
-      .then((resultData) => {
-        // console.log(Math.round(resultData.ethereum.usd));
-        setEthPrice(Math.round(resultData.ethereum.usd));
+        setEthPrice(resultData[0].current_price);
+        setGpPrice(resultData[1].current_price);
+        setGpDisplayPrice(gpPrice.toFixed(3));
       });
 
     // set the cost to mint a wizard based on current ETH and GP prices
@@ -122,7 +114,7 @@ const IndexPage = () => {
         />
         <DataCard
           title="Price of $GP"
-          number={gpPrice.toFixed(3)}
+          number={gpDisplayPrice}
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
