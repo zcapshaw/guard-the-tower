@@ -17,8 +17,11 @@
   "dependencies": {
     "@fontsource/press-start-2p": "^4.5.0",
     "babel-plugin-styled-components": "^2.0.2",
+    "dotenv": "^10.0.0",
     "gatsby": "^4.3.0",
     "gatsby-plugin-styled-components": "^5.3.0",
+    "gatsby-source-airtable": "^2.2.1",
+    "gatsby-source-filesystem": "^4.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.3.3"

@@ -9,16 +9,28 @@ const containerStyles = {
 };
 
 const numberStyles = {
-  padding: "2rem",
-  fontSize: 32,
+  fontSize: 36,
 };
 
-const DataCard = ({ title, number, footer }) => {
+const middleText = {
+  margin: "3rem",
+};
+
+const linkStyles = {
+  color: "white",
+};
+
+const DataCard = ({ title, number, footer, currency, footerUrl }) => {
   return (
     <div style={containerStyles}>
       <p>{title}</p>
-      <h1 style={numberStyles}>{number}</h1>
-      <p>{footer}</p>
+
+      <p style={middleText}>
+        <span style={numberStyles}>{number}</span> {currency}
+      </p>
+      <a style={linkStyles} href={footerUrl} target="_blank">
+        {footer}
+      </a>
     </div>
   );
 };
