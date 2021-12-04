@@ -5,8 +5,6 @@ import Layout from "../components/layout";
 import DataCard from "../components/data-card";
 import Footer from "../components/footer";
 
-console.log(process.env.AIRTABLE_API_KEY);
-
 // styles
 const pageStyles = {
   color: "#fff",
@@ -39,20 +37,43 @@ const wrapperStyles = {
 
 // markup
 const IndexPage = () => {
-  // fetch floor price
-  const [floorPrice, setFloorPrice] = useState(0.5);
-  // useEffect(() => {
-  //   // get data from GitHub api
-  //   console.log("asdfasdf");
-  //   fetch(
-  //     `https://api.opensea.io/collection/wizards-dragons-game-v2?format=api`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((resultData) => {
-  //       setFloorPrice(resultData.collection.stats.floor_price);
-  //       console.log("floorPrice");
-  //     });
-  // }, []);
+  const [floorPrice, setFloorPrice] = useState("-");
+  const [gpPrice, setGpPrice] = useState("-");
+  const [ethPrice, setEthPrice] = useState(0);
+  const [mintCost, setMintCost] = useState("-");
+
+  // fetch data from airtable
+  const queryResults = useStaticQuery(graphql`
+    query fetchData {
+      allAirtable(sort: { order: ASC, fields: id }, limit: 1) {
+        edges {
+          node {
+            data {
+              gp_price_usd
+              price_of_eth
+              timestamp
+              wizard_floor
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const calculateMintCost = (ethPrice, gpPrice) => {
+    const gpPricePerMint = 36000;
+    const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
+    return mintCost.toFixed(2);
+  };
+
+  //update state from queryResults
+  useEffect(() => {
+    const data = queryResults.allAirtable.edges[0].node.data;
+    console.log(data);
+    setFloorPrice(data.wizard_floor);
+    setGpPrice(data.gp_price_usd);
+    setMintCost(calculateMintCost(data.price_of_eth, data.gp_price_usd));
+  }, []);
 
   return (
     <Layout pageTitle="!guard">
@@ -71,14 +92,14 @@ const IndexPage = () => {
         />
         <DataCard
           title="$GP Mint Cost"
-          number="0.48"
+          number={mintCost}
           currency="ETH"
           footer="per 36,000 $GP"
           footerUrl="https://wnd.game/game"
         />
         <DataCard
           title="Price of $GP"
-          number="0.07"
+          number={gpPrice}
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
