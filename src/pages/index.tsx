@@ -87,11 +87,12 @@ const IndexPage = () => {
           footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW"
         />
         <DataCard
-          title="$GP Mint Cost"
+          title="$GP Mint Cost "
           number={mintCost}
           currency="ETH"
           footer="per 48,000 $GP"
           footerUrl="https://wnd.game/game"
+          hasTooltip="true"
         />
         <DataCard
           title="Price of $GP"
@@ -101,7 +102,7 @@ const IndexPage = () => {
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
         />
       </div>
-      <ChartIframe />
+      <ChartIframe url="https://dune.xyz/embeds/275555/519579/6962b8d0-997d-4440-a074-df47d1dc10e2" />
       <Footer />
     </Layout>
   );
