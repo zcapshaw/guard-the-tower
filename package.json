@@ -19,6 +19,7 @@
     "babel-plugin-styled-components": "^2.0.2",
     "dotenv": "^10.0.0",
     "gatsby": "^4.3.0",
+    "gatsby-plugin-google-gtag": "^4.3.0",
     "gatsby-plugin-manifest": "^4.3.0",
     "gatsby-source-airtable": "^2.2.1",
     "gatsby-source-filesystem": "^4.3.0",
