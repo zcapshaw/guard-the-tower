@@ -90,7 +90,7 @@ const IndexPage = () => {
           title="$GP Mint Cost"
           number={mintCost}
           currency="ETH"
-          footer="per 36,000 $GP"
+          footer="per 48,000 $GP"
           footerUrl="https://wnd.game/game"
         />
         <DataCard
