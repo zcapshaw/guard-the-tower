@@ -32,5 +32,6 @@ module.exports = {
         icon: `src/images/wizard.png`,
       },
     },
+    `gatsby-plugin-postcss`,
   ],
 };

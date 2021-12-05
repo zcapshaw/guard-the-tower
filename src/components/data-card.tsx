@@ -2,33 +2,20 @@ import React from "react";
 
 const containerStyles = {
   backgroundColor: "#8954A8",
-  width: "20rem",
-  padding: "2rem 5rem",
-  textAlign: "center",
-  margin: "2rem",
-};
-
-const numberStyles = {
-  fontSize: 36,
-};
-
-const middleText = {
-  margin: "3rem",
-};
-
-const linkStyles = {
-  color: "white",
 };
 
 const DataCard = ({ title, number, footer, currency, footerUrl }) => {
   return (
-    <div style={containerStyles}>
+    <div
+      style={containerStyles}
+      class="flex flex-col items-center justify-center m-8 w-80 h-64"
+    >
       <p>{title}</p>
 
-      <p style={middleText}>
-        <span style={numberStyles}>{number}</span> {currency}
+      <p class="my-8">
+        <span class="text-4xl">{number}</span> {currency}
       </p>
-      <a style={linkStyles} href={footerUrl} target="_blank">
+      <a class="underline" href={footerUrl} target="_blank">
         {footer}
       </a>
     </div>

@@ -1,37 +1,24 @@
 import React from "react";
 
-const containerStyles = {
-  textAlign: "center",
-  marginTop: "5rem",
-};
-
-const linkStyles = {
-  color: "white",
-};
-
 const footnoteStyles = {
   fontSize: 12,
   marginTop: 18,
 };
 
-const codeStyles = {
-  fontSize: 18,
-};
-
 const tipJarContainer = {
   backgroundColor: "#8954A8",
-  width: "40rem",
-  padding: "0.25rem",
-  margin: "auto",
 };
 
 const Footer = () => {
   return (
-    <div style={containerStyles}>
-      <div style={tipJarContainer}>
-        <p>
+    <div class="text-center mt-16">
+      <div
+        class="w-screen md:w-max m-auto mb-4 p-4 flex-wrap"
+        style={tipJarContainer}
+      >
+        <p class="text-sm md:text-lg">
           🙏Tip Jar:{" "}
-          <code style={codeStyles}>
+          <code class="text-sm md:text-lg">
             0x4047F19DE6dd9497fca2e7A64c121cC2c97B9B82
           </code>
         </p>
@@ -40,17 +27,17 @@ const Footer = () => {
       <p>
         Feedback or ideas?{" "}
         <a
-          style={linkStyles}
+          class="text-white"
           href="https://twitter.com/zachcapshaw"
           target="_blank"
         >
           Tweet at me
         </a>
       </p>
-      <p style={footnoteStyles}>
+      <p class="my-4 text-xs">
         Special thanks to{" "}
         <a
-          style={linkStyles}
+          class="text-white"
           href="https://twitter.com/turfnft"
           target="_blank"
         >
