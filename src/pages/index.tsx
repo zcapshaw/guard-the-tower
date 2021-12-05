@@ -66,7 +66,7 @@ const IndexPage = () => {
   }, []);
 
   const calculateMintCost = (ethPrice, gpPrice) => {
-    const gpPricePerMint = 36000;
+    const gpPricePerMint = 48000;
     const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
     return mintCost.toFixed(2);
   };
