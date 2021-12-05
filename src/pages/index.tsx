@@ -6,30 +6,6 @@ import DataCard from "../components/data-card";
 import Footer from "../components/footer";
 import ChartIframe from "../components/chart-iframe";
 
-// styles
-const pageStyles = {
-  color: "#fff",
-  padding: 80,
-};
-const headingStyles = {
-  marginTop: 64,
-  marginBottom: 32,
-};
-
-const paragraphStyles = {
-  marginBottom: 20,
-};
-
-const containerStyles = {
-  margin: 0,
-  textAlign: "center",
-};
-
-const emojiStyles = {
-  fontSize: 50,
-  marginBottom: 24,
-};
-
 const wrapperStyles = {
   display: "flex",
   justifyContent: "center",
@@ -97,12 +73,12 @@ const IndexPage = () => {
 
   return (
     <Layout pageTitle="!guard">
-      <div style={containerStyles}>
-        <h1 style={headingStyles}>!GUARD THE TOWER</h1>
-        <p style={paragraphStyles}>A dashboard for Wizards & Dragons Game</p>
-        <h1 style={emojiStyles}>🧙‍♂️🐉</h1>
+      <div class="text-center">
+        <h1 class="mt-10 mb-4 text-3xl">!GUARD THE TOWER</h1>
+        <p class="mb-4">A dashboard for Wizards & Dragons Game</p>
+        <h1 class="text-6xl mb-8">🧙‍♂️🐉</h1>
       </div>
-      <div style={wrapperStyles}>
+      <div class="flex justify-center items-center flex-col lg:flex-row">
         <DataCard
           title="Wizard Floor Price"
           number={floorPrice}
