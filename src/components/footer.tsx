@@ -17,7 +17,7 @@ const Footer = () => {
         style={tipJarContainer}
       >
         <p class="text-sm md:text-lg">
-          🙏Tip Jar:{" "}
+          🙏💜 Donate $GP here:{" "}
           <code class="text-sm md:text-lg">
             0x4047F19DE6dd9497fca2e7A64c121cC2c97B9B82
           </code>
@@ -27,7 +27,7 @@ const Footer = () => {
       <p>
         Feedback or ideas?{" "}
         <a
-          class="text-white"
+          class="text-white underline"
           href="https://twitter.com/zachcapshaw"
           target="_blank"
         >
@@ -37,7 +37,7 @@ const Footer = () => {
       <p class="my-4 text-xs">
         Special thanks to{" "}
         <a
-          class="text-white"
+          class="text-white underline"
           href="https://twitter.com/turfnft"
           target="_blank"
         >
