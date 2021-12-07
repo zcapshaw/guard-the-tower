@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import "@fontsource/press-start-2p";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+
 import Layout from "../components/layout";
 import DataCard from "../components/data-card";
 import Footer from "../components/footer";
@@ -61,7 +64,7 @@ const IndexPage = () => {
       .then((response) => response.json()) // parse JSON from request
       .then((resultData) => {
         // console.log(resultData.stats.floor_price);
-        setFloorPrice(resultData.stats.floor_price);
+        setFloorPrice(resultData.stats.floor_price.toFixed(3));
       });
   }, []);
 
@@ -78,15 +81,18 @@ const IndexPage = () => {
         <p class="mb-4">A dashboard for Wizards & Dragons Game</p>
         <h1 class="text-6xl mb-8">🧙‍♂️🐉</h1>
       </div>
-      <div class="flex justify-center items-center flex-col lg:flex-row">
+      <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
         <DataCard
+          emoji="🧹"
           title="Wizard Floor Price"
           number={floorPrice}
           currency="ETH"
           footer="OpenSea"
           footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW"
         />
+
         <DataCard
+          emoji="✨"
           title="$GP Mint Cost "
           number={mintCost}
           currency="ETH"
@@ -94,12 +100,22 @@ const IndexPage = () => {
           footerUrl="https://wnd.game/game"
           hasTooltip="true"
         />
+      </div>
+      <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
+        {" "}
         <DataCard
+          emoji="📈"
           title="Price of $GP"
           number={gpDisplayPrice}
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
+        />
+        <DataCard
+          emoji="⏳"
+          title="Epoch 3 Countdown"
+          number="2031"
+          footer="mints remaining"
         />
       </div>
       <ChartIframe url="https://dune.xyz/embeds/275555/519579/6962b8d0-997d-4440-a074-df47d1dc10e2" />
