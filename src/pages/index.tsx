@@ -101,7 +101,7 @@ const IndexPage = () => {
   };
 
   const calculateMintCost = (ethPrice, gpPrice) => {
-    const gpPricePerMint = 48000;
+    const gpPricePerMint = 60000;
     const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
     return mintCost.toFixed(2);
   };
@@ -128,7 +128,7 @@ const IndexPage = () => {
           title="$GP Mint Cost "
           number={mintCost}
           currency="ETH"
-          footer="per 48,000 $GP"
+          footer="per 60,000 $GP"
           footerUrl="https://wnd.game/game"
           hasTooltip="true"
         />
