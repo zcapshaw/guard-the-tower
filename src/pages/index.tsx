@@ -150,7 +150,7 @@ const IndexPage = () => {
           footer="mints remaining"
         />
       </div>
-      <ChartIframe url="https://dune.xyz/embeds/275555/519579/6962b8d0-997d-4440-a074-df47d1dc10e2" />
+      <ChartIframe url="https://dune.xyz/embeds/275555/519579/ff68320a-d4c2-4814-aba6-7e98f463a62a" />
       <Footer />
     </Layout>
   );
