@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import Web3 from "web3/dist/web3.min.js";
 
 import "@fontsource/press-start-2p";
