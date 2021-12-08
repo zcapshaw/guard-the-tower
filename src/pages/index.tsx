@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import Web3 from "web3/dist/web3.min.js";
+
 import "@fontsource/press-start-2p";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -8,12 +10,6 @@ import Layout from "../components/layout";
 import DataCard from "../components/data-card";
 import Footer from "../components/footer";
 import ChartIframe from "../components/chart-iframe";
-
-const wrapperStyles = {
-  display: "flex",
-  justifyContent: "center",
-  // backgroundColor: "red",
-};
 
 // markup
 const IndexPage = () => {
@@ -26,12 +22,12 @@ const IndexPage = () => {
   const [epoch, setEpoch] = useState(3);
 
   const epochText = `Epoch ${epoch} Countdown`;
+  const providerUrl = process.env.PROVIDER_URL;
+
+  const web3 = new Web3(providerUrl);
 
   // fetch price data from CoinGecko API
   useEffect(() => {
-    // for fun
-    console.log("!guard 🧙‍♂️🐉");
-
     // fetch ETH and $GP price
     fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20wizards-and-dragons&order=market_cap_desc`
@@ -71,19 +67,42 @@ const IndexPage = () => {
       });
   };
 
-  const fetchTotalTokenCount = () => {
-    const apiKey = process.env.ETHERSCAN_API_KEY;
+  const fetchTotalTokenCount = async () => {
+    let pendingMints;
 
-    fetch(
-      `https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x999e88075692bcee3dbc07e7e64cd32f39a1d3ab&apikey=${apiKey}`
-    )
-      .then((response) => response.json()) // parse JSON from request
-      .then((resultData) => {
-        // fetch the token count from etherscan
-        countdownCalculator(resultData.result);
-      })
-      .catch((error) => {
-        console.log(error);
+    // define the contract interface
+    const ABI = [
+      {
+        inputs: [],
+        name: "minted",
+        outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
+        stateMutability: "view",
+        type: "function",
+      },
+    ];
+
+    // Instantiate minting contract object
+    const contract = new web3.eth.Contract(
+      ABI,
+      "0x999e88075692bCeE3dBC07e7E64cD32f39A1D3ab"
+    );
+
+    // fetch totalMinted
+    const totalMinted = await contract.methods
+      .minted()
+      .call((error, result) => {
+        // console.log(result);
+      });
+
+    // fetch pending mints from contract and calculate total number
+    web3.eth
+      .getStorageAt("0x1c5194668faab6a895b1febbf3dc219077cdd732", 8)
+      .then((result) => {
+        const pendingMints = parseInt(result.slice(58, 62), 16);
+        const totalTokens = pendingMints + parseInt(totalMinted);
+        // console.log(pendingMints);
+        // console.log(totalTokens);
+        countdownCalculator(totalTokens);
       });
   };
 
