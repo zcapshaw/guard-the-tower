@@ -15,9 +15,8 @@ const CardGrid = () => {
 
   const isBrowser = typeof window !== "undefined";
   const epochText = `Epoch ${epoch} Countdown`;
-  const providerUrl = process.env.PROVIDER_URL;
 
-  const web3 = new Web3(providerUrl);
+  const web3 = new Web3(process.env.PROVIDER_URL);
 
   // fetch price data from CoinGecko API
   useEffect(() => {
