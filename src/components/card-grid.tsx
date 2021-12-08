@@ -16,7 +16,9 @@ const CardGrid = () => {
   const isBrowser = typeof window !== "undefined";
   const epochText = `Epoch ${epoch} Countdown`;
 
-  const web3 = new Web3(process.env.PROVIDER_URL);
+  const web3 = new Web3(
+    "https://mainnet.infura.io/v3/67a52ac8afec4c43bdc567d617a4302b"
+  );
 
   // fetch price data from CoinGecko API
   useEffect(() => {
