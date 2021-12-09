@@ -91,7 +91,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white p-4"
                 style={textStyles}
-                sx={{ fontFamily = "Press Start 2P" }}
+                sx={{ fontFamily: "Press Start 2P" }}
               >
                 Dragon Rank
               </TableCell>
@@ -99,7 +99,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white"
                 style={textStyles}
-                sx={{ fontFamily = "Press Start 2P" }}
+                sx={{ fontFamily: "Press Start 2P" }}
               >
                 OpenSea Floor Price
               </TableCell>
@@ -114,7 +114,7 @@ const DragonTable = () => {
                   scope="row"
                   class="text-white p-2 border-white border-opacity-100"
                   style={textStyles}
-                  sx={{ fontFamily = "Press Start 2P" }}
+                  sx={{ fontFamily: "Press Start 2P" }}
                 >
                   {row.rank}
                 </TableCell>
@@ -122,7 +122,7 @@ const DragonTable = () => {
                   align="center"
                   class="text-white text-center"
                   style={textStyles}
-                  sx={{ fontFamily = "Press Start 2P" }}
+                  sx={{ fontFamily: "Press Start 2P" }}
                 >
                   {row.price}
                 </TableCell>
