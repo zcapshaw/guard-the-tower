@@ -35,6 +35,10 @@ const containerStyles = {
   backgroundColor: "#8954A8",
 };
 
+const textStyles = {
+  color: "white",
+};
+
 const DragonTable = () => {
   const [r5Price, setR5Price] = useState("-");
   const [r6Price, setR6Price] = useState("-");
@@ -78,14 +82,18 @@ const DragonTable = () => {
       style={containerStyles}
       class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 mx-auto my-8"
     >
-      <TableContainer>
+      <TableContainer class="text-white">
         <Table aria-label="simple table">
           <TableHead>
             <TableRow class="border-b">
-              <TableCell align="center" class="text-white p-4">
+              <TableCell
+                align="center"
+                class="text-white p-4"
+                style={textStyles}
+              >
                 Dragon Rank
               </TableCell>
-              <TableCell align="center" class="text-white">
+              <TableCell align="center" class="text-white" style={textStyles}>
                 OpenSea Floor Price
               </TableCell>
             </TableRow>
@@ -98,10 +106,15 @@ const DragonTable = () => {
                   component="th"
                   scope="row"
                   class="text-white p-2 border-white border-opacity-100"
+                  style={textStyles}
                 >
                   {row.rank}
                 </TableCell>
-                <TableCell align="center" class="text-white text-center">
+                <TableCell
+                  align="center"
+                  class="text-white text-center"
+                  style={textStyles}
+                >
                   {row.price}
                 </TableCell>
               </TableRow>
