@@ -81,9 +81,9 @@ const DragonTable = () => {
   return (
     <div
       style={containerStyles}
-      class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 mx-auto my-8"
+      class="container flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 mx-auto my-8"
     >
-      <TableContainer class="text-white">
+      <TableContainer class="text-white container">
         <Table aria-label="simple table">
           <TableHead>
             <TableRow class="border-b">
