@@ -19,6 +19,7 @@
     "@emotion/styled": "^11.6.0",
     "@fontsource/press-start-2p": "^4.5.0",
     "@mui/material": "^5.2.2",
+    "@mui/x-data-grid": "^5.1.0",
     "babel-plugin-styled-components": "^2.0.2",
     "dotenv": "^10.0.0",
     "gatsby": "^4.3.0",
