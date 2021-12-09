@@ -21,7 +21,7 @@ const DataCard = ({
     "Calculated as: (GP price per mint * Current GP/USD price) / Current ETH/USD price";
 
   return (
-    <div style={containerStyles} class="text-center m-4 p-4 w-1/2 h-64">
+    <div style={containerStyles} class="text-center m-4 p-4 w-1/2 h-72">
       <div class="text-4xl mb-4">{emoji}</div>
 
       <div class="flex justify-center text-xs md:text-base">
@@ -38,7 +38,7 @@ const DataCard = ({
       </div>
 
       <p class="my-8">
-        <span class="text-2xl md:text-4xl">{number}</span> {currency}
+        <span class="text-xl md:text-4xl">{number}</span> {currency}
       </p>
       <a
         class={
