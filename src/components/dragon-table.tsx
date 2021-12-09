@@ -37,6 +37,7 @@ const containerStyles = {
 
 const textStyles = {
   color: "white",
+  font-family: "Press Start 2P"
 };
 
 const DragonTable = () => {
