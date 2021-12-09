@@ -18,7 +18,7 @@ import {
 
 // Initialize Cloud Firestore through Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBQWdZ5H4BT23k0mfwbDG77oMCgNIt0cTk",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "guard-the-tower.firebaseapp.com",
   projectId: "guard-the-tower",
   storageBucket: "guard-the-tower.appspot.com",
@@ -72,6 +72,7 @@ const DragonTable = () => {
     createData(7, r7Price),
     createData(8, r8Price),
   ];
+
   return (
     <div
       style={containerStyles}
