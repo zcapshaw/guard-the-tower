@@ -115,7 +115,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white"
                 style={textStyles}
-                sx={{ fontFamily: "Press Start 2P" }}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
                 Gen 0 Floor Price
               </TableCell>
@@ -123,7 +123,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white"
                 style={textStyles}
-                sx={{ fontFamily: "Press Start 2P" }}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
                 Gen 1 Floor Price
               </TableCell>
@@ -138,7 +138,7 @@ const DragonTable = () => {
                   scope="row"
                   class="text-white p-2 border-white border-opacity-100"
                   style={textStyles}
-                  sx={{ fontFamily: "Press Start 2P" }}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
                 >
                   {row.rank}
                 </TableCell>
@@ -146,7 +146,7 @@ const DragonTable = () => {
                   align="center"
                   class="text-white text-center"
                   style={textStyles}
-                  sx={{ fontFamily: "Press Start 2P" }}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
                 >
                   {row.gen0Price}
                 </TableCell>
@@ -154,7 +154,7 @@ const DragonTable = () => {
                   align="center"
                   class="text-white text-center"
                   style={textStyles}
-                  sx={{ fontFamily: "Press Start 2P" }}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
                 >
                   {row.gen1Price}
                 </TableCell>
