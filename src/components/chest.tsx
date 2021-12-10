@@ -1,12 +1,8 @@
 import React from "react";
-import { StaticImage } from "gatsby-plugin-image/";
+import chest from "../images/chest.png";
 
 const Chest = () => {
-  return (
-    <div class="w-80 h-80">
-      <StaticImage src="../images/chest.png" alt="A Treasure Chest" />
-    </div>
-  );
+  return <img src={chest} alt="A treasure chest" />;
 };
 
-export default Chest;
+export { Chest };

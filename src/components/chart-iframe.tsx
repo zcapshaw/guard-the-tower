@@ -8,4 +8,4 @@ const ChartIframe = ({ url }) => {
   );
 };
 
-export default ChartIframe;
+export { ChartIframe };

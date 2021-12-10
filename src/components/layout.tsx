@@ -10,4 +10,4 @@ const Layout = ({ pageTitle, children }) => {
   );
 };
 
-export default Layout;
+export { Layout };

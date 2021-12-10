@@ -166,4 +166,4 @@ const DragonTable = () => {
     </div>
   );
 };
-export default DragonTable;
+export { DragonTable };

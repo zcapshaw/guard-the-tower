@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "@fontsource/press-start-2p";
 
-import Layout from "../components/layout";
-import DragonTable from "../components/dragon-table";
-import Footer from "../components/footer";
-import ChartIframe from "../components/chart-iframe";
-import Chest from "../components/chest";
+import { Layout, DragonTable, Footer, ChartIframe, Chest } from "../components";
+
+// import Layout from "../components/layout";
+// import DragonTable from "../components/dragon-table";
+// import Footer from "../components/footer";
+// import ChartIframe from "../components/chart-iframe";
+// import Chest from "../components/chest";
+// import
 
 const ClientSideOnlyLazy = React.lazy(() => import("../components/card-grid"));
 

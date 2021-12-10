@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@material-ui/core";
 import Web3 from "web3/dist/web3.min.js";
 
-import DataCard from "../components/data-card";
+import { DataCard } from "./data-card";
 
 const CardGrid = () => {
   const [floorPrice, setFloorPrice] = useState("-");
