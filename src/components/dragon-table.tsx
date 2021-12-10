@@ -117,7 +117,7 @@ const DragonTable = () => {
                 style={textStyles}
                 sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
-                Gen 0 Floor Price
+                Gen 0 Floor
               </TableCell>
               <TableCell
                 align="center"
@@ -125,7 +125,7 @@ const DragonTable = () => {
                 style={textStyles}
                 sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
-                Gen 1 Floor Price
+                Gen 1 Floor
               </TableCell>
             </TableRow>
           </TableHead>
