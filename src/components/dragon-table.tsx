@@ -37,7 +37,7 @@ const containerStyles = {
 
 const textStyles = {
   color: "white",
-  fontFamily: "Press Start 2P",
+  fontFamily: "Press Start 2P !important" as any,
 };
 
 const DragonTable = () => {
@@ -107,7 +107,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white p-4"
                 style={textStyles}
-                sx={{ fontFamily: "Press Start 2P" }}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
                 Dragon Rank
               </TableCell>
