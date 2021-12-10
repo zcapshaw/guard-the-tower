@@ -2,7 +2,6 @@ import React from "react";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
-import Box from "@mui/material/Box";
 
 const containerStyles = {
   backgroundColor: "#8954A8",
@@ -53,4 +52,4 @@ const DataCard = ({
   );
 };
 
-export default DataCard;
+export { DataCard };
