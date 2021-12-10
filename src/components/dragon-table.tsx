@@ -37,7 +37,7 @@ const containerStyles = {
 
 const textStyles = {
   color: "white",
-  fontFamily: "Press Start 2P",
+  fontFamily: "Press Start 2P !important" as any,
 };
 
 const DragonTable = () => {
@@ -45,10 +45,23 @@ const DragonTable = () => {
   const [r6Price, setR6Price] = useState("-");
   const [r7Price, setR7Price] = useState("-");
   const [r8Price, setR8Price] = useState("-");
+  const [g0r5Price, setG0R5Price] = useState("-");
+  const [g0r6Price, setG0R6Price] = useState("-");
+  const [g0r7Price, setG0R7Price] = useState("-");
+  const [g0r8Price, setG0R8Price] = useState("-");
 
   useEffect(() => {
     fetchData();
-  }, [r5Price, r6Price, r7Price, r8Price]);
+  }, [
+    r5Price,
+    r6Price,
+    r7Price,
+    r8Price,
+    g0r5Price,
+    g0r6Price,
+    g0r7Price,
+    g0r8Price,
+  ]);
 
   // query firestore for floor data
   const fetchData = async () => {
@@ -63,19 +76,22 @@ const DragonTable = () => {
       setR6Price(doc.data().level_6_floor);
       setR7Price(doc.data().level_7_floor);
       setR8Price(doc.data().level_8_floor);
-      console.log(r7Price);
+      setG0R5Price(doc.data().gen0_level_5_floor);
+      setG0R6Price(doc.data().gen0_level_6_floor);
+      setG0R7Price(doc.data().gen0_level_7_floor);
+      setG0R8Price(doc.data().gen0_level_8_floor);
     });
   };
 
-  function createData(rank: number, price: number) {
-    return { rank, price };
+  function createData(rank: number, gen0Price: number, gen1Price: number) {
+    return { rank, gen0Price, gen1Price };
   }
 
   const rows = [
-    createData(5, r5Price),
-    createData(6, r6Price),
-    createData(7, r7Price),
-    createData(8, r8Price),
+    createData(5, g0r5Price, r5Price),
+    createData(6, g0r6Price, r6Price),
+    createData(7, g0r7Price, r7Price),
+    createData(8, g0r8Price, r8Price),
   ];
 
   return (
@@ -91,7 +107,7 @@ const DragonTable = () => {
                 align="center"
                 class="text-white p-4"
                 style={textStyles}
-                sx={{ fontFamily: "Press Start 2P" }}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
                 Dragon Rank
               </TableCell>
@@ -99,9 +115,17 @@ const DragonTable = () => {
                 align="center"
                 class="text-white"
                 style={textStyles}
-                sx={{ fontFamily: "Press Start 2P" }}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
               >
-                OpenSea Floor Price
+                Gen 0 Floor Price
+              </TableCell>
+              <TableCell
+                align="center"
+                class="text-white"
+                style={textStyles}
+                sx={{ fontFamily: "'Press Start 2P' !important" }}
+              >
+                Gen 1 Floor Price
               </TableCell>
             </TableRow>
           </TableHead>
@@ -114,7 +138,7 @@ const DragonTable = () => {
                   scope="row"
                   class="text-white p-2 border-white border-opacity-100"
                   style={textStyles}
-                  sx={{ fontFamily: "Press Start 2P" }}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
                 >
                   {row.rank}
                 </TableCell>
@@ -122,9 +146,17 @@ const DragonTable = () => {
                   align="center"
                   class="text-white text-center"
                   style={textStyles}
-                  sx={{ fontFamily: "Press Start 2P" }}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
                 >
-                  {row.price}
+                  {row.gen0Price}
+                </TableCell>
+                <TableCell
+                  align="center"
+                  class="text-white text-center"
+                  style={textStyles}
+                  sx={{ fontFamily: "'Press Start 2P' !important" }}
+                >
+                  {row.gen1Price}
                 </TableCell>
               </TableRow>
             ))}
