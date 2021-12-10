@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import DragonTable from "../components/dragon-table";
 import Footer from "../components/footer";
 import ChartIframe from "../components/chart-iframe";
+import Chest from "../components/chest";
 
 const ClientSideOnlyLazy = React.lazy(() => import("../components/card-grid"));
 
@@ -26,6 +27,7 @@ const IndexPage = () => {
         </React.Suspense>
       )}
       <DragonTable />
+      <Chest />
       <ChartIframe url="https://dune.xyz/embeds/275555/519579/ff68320a-d4c2-4814-aba6-7e98f463a62a" />
       <Footer />
     </Layout>
