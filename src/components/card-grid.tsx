@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3/dist/web3.min.js";
 
 import { DataCard } from "./data-card";
+import gen0 from "../images/gen0-wizard.png";
+import gen1 from "../images/gen1-wizard.png";
 
 const CardGrid = () => {
   const [floorPrice, setFloorPrice] = useState("-");
@@ -97,12 +99,20 @@ const CardGrid = () => {
     <div>
       <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
         <DataCard
-          emoji="🧹"
-          title="Wizard Floor Price"
+          img={gen1}
+          title="Gen 1 Wizard Floor"
           number={floorPrice}
           currency="ETH"
           footer="OpenSea"
-          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW"
+          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Generation&search[stringTraits][0][values][0]=Gen%201&search[toggles][0]=BUY_NOW"
+        />
+        <DataCard
+          img={gen0}
+          title="Gen 0 Wizard Floor"
+          number={floorPrice}
+          currency="ETH"
+          footer="OpenSea"
+          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Generation&search[stringTraits][0][values][0]=Gen%200&search[toggles][0]=BUY_NOW"
         />
         <DataCard
           emoji="📈"

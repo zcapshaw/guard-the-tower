@@ -15,15 +15,22 @@ const DataCard = ({
   footerUrl,
   hasTooltip,
   emoji,
+  img,
 }) => {
   const tooltipText =
     "Calculated as: (GP price per mint * Current GP/USD price) / Current ETH/USD price";
 
   return (
     <div style={containerStyles} class="text-center m-4 p-4 w-1/2 h-72">
-      <div class="text-4xl mb-4">{emoji}</div>
+      {emoji ? (
+        <div class="text-4xl mb-2">{emoji}</div>
+      ) : (
+        <div class="flex justify-center">
+          <img src={img} class="w-12" />
+        </div>
+      )}
 
-      <div class="flex justify-center text-xs md:text-base">
+      <div class="flex justify-center text-xs md:text-base p-4">
         {title}{" "}
         {hasTooltip ? (
           <Tooltip title={tooltipText} arrow placement="top">
