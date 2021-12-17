@@ -15,6 +15,8 @@ import air from "../images/air_rune.png";
 import earth from "../images/earth_rune.png";
 import water from "../images/water_rune.png";
 import fire from "../images/fire_rune.png";
+import magic from "../images/magic_rune.png";
+import whip from "../images/whip.png";
 import { ItemCard } from "./";
 
 // Initialize Cloud Firestore through Firebase
@@ -42,10 +44,20 @@ const AltarItems = () => {
   const [earthPrice, setEarthPrice] = useState("-");
   const [waterPrice, setWaterPrice] = useState("-");
   const [firePrice, setFirePrice] = useState("-");
+  const [magicPrice, setMagicPrice] = useState("-");
+  const [whipPrice, setWhipPrice] = useState("-");
 
   useEffect(() => {
     fetchData();
-  }, [chestPrice, airPrice, earthPrice, waterPrice, firePrice]);
+  }, [
+    chestPrice,
+    airPrice,
+    earthPrice,
+    waterPrice,
+    firePrice,
+    magicPrice,
+    whipPrice,
+  ]);
 
   const fetchData = async () => {
     const floorsRef = collection(db, "dragon_floors");
@@ -58,6 +70,8 @@ const AltarItems = () => {
       setEarthPrice(doc.data().earth_rune_floor);
       setWaterPrice(doc.data().water_rune_floor);
       setFirePrice(doc.data().fire_rune_floor);
+      setMagicPrice(doc.data().magic_rune_floor);
+      setWhipPrice(doc.data().dragon_whip_floor);
     });
   };
 
@@ -67,12 +81,51 @@ const AltarItems = () => {
       style={containerStyles}
     >
       <h1 class="p-4 text-lg">Altar Item Floors</h1>
-      <div class="flex w-full justify-around">
-        <ItemCard img={chest} alt="a treasure chest" price={chestPrice} />
-        <ItemCard img={air} alt="air rune" price={airPrice} />
-        <ItemCard img={earth} alt="earth rune" price={earthPrice} />
-        <ItemCard img={water} alt="water rune" price={waterPrice} />
-        <ItemCard img={fire} alt="fire rune" price={firePrice} />
+      <div class="flex w-full justify-center">
+        <ItemCard
+          img={magic}
+          alt="a magic rune"
+          price={magicPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/7"
+        />
+        <ItemCard
+          img={air}
+          alt="air rune"
+          price={airPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/1"
+        />
+        <ItemCard
+          img={earth}
+          alt="earth rune"
+          price={earthPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/2"
+        />
+        <ItemCard
+          img={water}
+          alt="water rune"
+          price={waterPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/3"
+        />
+      </div>
+      <div class="flex w-full justify-center">
+        <ItemCard
+          img={fire}
+          alt="fire rune"
+          price={firePrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/4"
+        />
+        <ItemCard
+          img={chest}
+          alt="a treasure chest"
+          price={chestPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/5"
+        />
+        <ItemCard
+          img={whip}
+          alt="dragon whip"
+          price={whipPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/6"
+        />
       </div>
     </div>
   );

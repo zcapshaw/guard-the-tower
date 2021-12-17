@@ -83,15 +83,45 @@ const DragonTable = () => {
     });
   };
 
-  function createData(rank: number, gen0Price: number, gen1Price: number) {
-    return { rank, gen0Price, gen1Price };
+  function createData(
+    rank: number,
+    gen0Price: number,
+    gen0url: string,
+    gen1Price: number,
+    gen1url: string
+  ) {
+    return { rank, gen0Price, gen0url, gen1Price, gen1url };
   }
 
   const rows = [
-    createData(5, g0r5Price, r5Price),
-    createData(6, g0r6Price, r6Price),
-    createData(7, g0r7Price, r7Price),
-    createData(8, g0r8Price, r8Price),
+    createData(
+      5,
+      g0r5Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=5&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=Gen%200&search%5Btoggles%5D%5B0%5D=BUY_NOW",
+      r5Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=5&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=Gen%201&search%5Btoggles%5D%5B0%5D=BUY_NOW"
+    ),
+    createData(
+      6,
+      g0r6Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=6&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=Gen%200&search%5Btoggles%5D%5B0%5D=BUY_NOW",
+      r6Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=Gen%201&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=6&search%5Btoggles%5D%5B0%5D=BUY_NOW"
+    ),
+    createData(
+      7,
+      g0r7Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=7&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=Gen%200&search%5Btoggles%5D%5B0%5D=BUY_NOW",
+      r7Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=Gen%201&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=7&search%5Btoggles%5D%5B0%5D=BUY_NOW"
+    ),
+    createData(
+      8,
+      g0r8Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=8&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=Gen%200&search%5Btoggles%5D%5B0%5D=BUY_NOW",
+      r8Price,
+      "https://opensea.io/assets/wizards-dragons-game-v2?search%5BsortAscending%5D=true&search%5BsortBy%5D=PRICE&search%5BstringTraits%5D%5B0%5D%5Bname%5D=Type&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=Dragon&search%5BstringTraits%5D%5B1%5D%5Bname%5D=Generation&search%5BstringTraits%5D%5B1%5D%5Bvalues%5D%5B0%5D=Gen%201&search%5BstringTraits%5D%5B2%5D%5Bname%5D=Rank%20Score&search%5BstringTraits%5D%5B2%5D%5Bvalues%5D%5B0%5D=8&search%5Btoggles%5D%5B0%5D=BUY_NOW"
+    ),
   ];
 
   return (
@@ -144,19 +174,29 @@ const DragonTable = () => {
                 </TableCell>
                 <TableCell
                   align="center"
-                  class="text-white text-center"
+                  class="text-white text-center underline"
                   style={textStyles}
-                  sx={{ fontFamily: "'Press Start 2P' !important" }}
+                  sx={{
+                    fontFamily: "'Press Start 2P' !important",
+                    textDecoration: "underline",
+                  }}
                 >
-                  {row.gen0Price}
+                  <a href={row.gen0url} target="_blank">
+                    {row.gen0Price}
+                  </a>
                 </TableCell>
                 <TableCell
                   align="center"
-                  class="text-white text-center"
+                  class="text-white text-center underline"
                   style={textStyles}
-                  sx={{ fontFamily: "'Press Start 2P' !important" }}
+                  sx={{
+                    fontFamily: "'Press Start 2P' !important",
+                    textDecoration: "underline",
+                  }}
                 >
-                  {row.gen1Price}
+                  <a href={row.gen1url} target="_blank">
+                    {row.gen1Price}
+                  </a>
                 </TableCell>
               </TableRow>
             ))}

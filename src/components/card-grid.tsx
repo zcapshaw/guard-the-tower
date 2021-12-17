@@ -1,19 +1,43 @@
 import React, { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import {
+  query,
+  orderBy,
+  limit,
+  addDoc,
+  getFirestore,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import Web3 from "web3/dist/web3.min.js";
 
 import { DataCard } from "./data-card";
+import gen0 from "../images/gen0-wizard.png";
+import gen1 from "../images/gen1-wizard.png";
+
+// Initialize Cloud Firestore through Firebase
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "guard-the-tower.firebaseapp.com",
+  projectId: "guard-the-tower",
+  storageBucket: "guard-the-tower.appspot.com",
+  messagingSenderId: "651790840617",
+  appId: "1:651790840617:web:686eef7a004db7b50ebd38",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore();
 
 const CardGrid = () => {
   const [floorPrice, setFloorPrice] = useState("-");
   const [gpPrice, setGpPrice] = useState("-");
   const [gpDisplayPrice, setGpDisplayPrice] = useState("-");
   const [ethPrice, setEthPrice] = useState(0);
-  const [mintCost, setMintCost] = useState("-");
-  const [mintsRemaining, setMintsRemaining] = useState("-");
-  const [epoch, setEpoch] = useState(3);
+  const [gen0WizardFloor, setGen0WizardFloor] = useState("-");
 
   const isBrowser = typeof window !== "undefined";
-  const epochText = `Epoch ${epoch} Countdown`;
 
   const web3 = new Web3(
     "https://mainnet.infura.io/v3/67a52ac8afec4c43bdc567d617a4302b"
@@ -45,10 +69,9 @@ const CardGrid = () => {
       });
 
     // set the cost to mint a wizard based on current ETH and GP prices
-    setMintCost(calculateMintCost(ethPrice, gpPrice));
-    fetchTotalTokenCount();
     fetchFloorData();
-  }, [gpPrice, ethPrice, floorPrice, epoch, mintsRemaining]);
+    fetchFirestoreData();
+  }, [gpPrice, ethPrice, floorPrice, gen0WizardFloor]);
 
   const fetchFloorData = () => {
     fetch(
@@ -60,87 +83,74 @@ const CardGrid = () => {
       });
   };
 
-  const fetchTotalTokenCount = async () => {
-    let pendingMints;
-
-    // define the contract interface
-    const ABI = [
-      {
-        inputs: [],
-        name: "minted",
-        outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
-        stateMutability: "view",
-        type: "function",
-      },
-    ];
-
-    // Instantiate minting contract object
-    const contract = new web3.eth.Contract(
-      ABI,
-      "0x999e88075692bCeE3dBC07e7E64cD32f39A1D3ab"
-    );
-
-    // fetch totalMinted
-    const totalMinted = await contract.methods
-      .minted()
-      .call((error, result) => {
-        // console.log(result);
-      });
-
-    // fetch pending mints from contract and calculate total number
-    web3.eth
-      .getStorageAt("0x1c5194668faab6a895b1febbf3dc219077cdd732", 8)
-      .then((result) => {
-        const pendingMints = parseInt(result.slice(58, 62), 16);
-        const totalTokens = pendingMints + parseInt(totalMinted);
-        // console.log(pendingMints);
-        // console.log(totalTokens);
-        countdownCalculator(totalTokens);
-      });
+  const fetchFirestoreData = async () => {
+    const floorsRef = collection(db, "dragon_floors");
+    const q = query(floorsRef, orderBy("timestamp", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      setGen0WizardFloor(doc.data().gen0_wizard_floor);
+    });
   };
 
-  const countdownCalculator = (tokenCount) => {
-    if (tokenCount < 42000) {
-      setEpoch(3);
-      setMintsRemaining(42000 - tokenCount);
-    } else if (tokenCount < 51000) {
-      setEpoch(4);
-      setMintsRemaining(51000 - tokenCount);
-    } else if (tokenCount < 60000) {
-      setEpoch(5);
-      setMintsRemaining(60000 - tokenCount);
-    }
-  };
+  // const fetchTotalTokenCount = async () => {
+  //   let pendingMints;
 
-  const calculateMintCost = (ethPrice, gpPrice) => {
-    const gpPricePerMint = 60000;
-    const mintCost = (gpPricePerMint * gpPrice) / ethPrice;
-    return mintCost.toFixed(2);
-  };
+  //   // define the contract interface
+  //   const ABI = [
+  //     {
+  //       inputs: [],
+  //       name: "minted",
+  //       outputs: [{ internalType: "uint16", name: "", type: "uint16" }],
+  //       stateMutability: "view",
+  //       type: "function",
+  //     },
+  //   ];
+
+  //   // Instantiate minting contract object
+  //   const contract = new web3.eth.Contract(
+  //     ABI,
+  //     "0x999e88075692bCeE3dBC07e7E64cD32f39A1D3ab"
+  //   );
+
+  //   // fetch totalMinted
+  //   const totalMinted = await contract.methods
+  //     .minted()
+  //     .call((error, result) => {
+  //       // console.log(result);
+  //     });
+
+  //   // fetch pending mints from contract and calculate total number
+  //   web3.eth
+  //     .getStorageAt("0x1c5194668faab6a895b1febbf3dc219077cdd732", 8)
+  //     .then((result) => {
+  //       const pendingMints = parseInt(result.slice(58, 62), 16);
+  //       const totalTokens = pendingMints + parseInt(totalMinted);
+  //       // console.log(pendingMints);
+  //       // console.log(totalTokens);
+  //       countdownCalculator(totalTokens);
+  //     });
+  // };
 
   return (
     <div>
-      <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
+      <div class="flex flex-col justify-center items-center md:flex-row w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
         <DataCard
-          emoji="🧹"
-          title="Wizard Floor Price"
+          img={gen1}
+          title="Gen 1 Wizard Floor"
           number={floorPrice}
           currency="ETH"
           footer="OpenSea"
-          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW"
+          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Generation&search[stringTraits][0][values][0]=Gen%201&search[toggles][0]=BUY_NOW"
         />
-
         <DataCard
-          emoji="✨"
-          title="$GP Mint Cost "
-          number={mintCost}
+          img={gen0}
+          title="Gen 0 Wizard Floor"
+          number={gen0WizardFloor}
           currency="ETH"
-          footer="per 60,000 $GP"
-          footerUrl="https://wnd.game/game"
-          hasTooltip="true"
+          footer="OpenSea"
+          footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Generation&search[stringTraits][0][values][0]=Gen%200&search[toggles][0]=BUY_NOW"
         />
-      </div>
-      <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
         <DataCard
           emoji="📈"
           title="Price of $GP"
@@ -148,12 +158,6 @@ const CardGrid = () => {
           currency="USD"
           footer="Uniswap"
           footerUrl="https://app.uniswap.org/#/swap?outputCurrency=0x38ec27c6f05a169e7ed03132bca7d0cfee93c2c5"
-        />
-        <DataCard
-          emoji="⏳"
-          title={epochText}
-          number={mintsRemaining}
-          footer="mints remaining"
         />
       </div>
     </div>

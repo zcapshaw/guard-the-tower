@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <div class="text-center mt-16">
       <div
-        class="w-screen md:w-max m-auto mb-4 p-4 flex-wrap"
+        class="w-screen lg:w-max m-auto mb-4 p-4 flex-wrap"
         style={tipJarContainer}
       >
         <p class="text-sm md:text-lg">
