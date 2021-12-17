@@ -186,7 +186,10 @@ const DragonTable = () => {
                   align="center"
                   class="text-white text-center underline"
                   style={textStyles}
-                  sx={{ fontFamily: "'Press Start 2P' !important" }}
+                  sx={{
+                    fontFamily: "'Press Start 2P' !important",
+                    textDecoration: "underline",
+                  }}
                 >
                   <a href={row.gen1url} target="_blank">
                     {row.gen1Price}
