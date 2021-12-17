@@ -68,11 +68,36 @@ const AltarItems = () => {
     >
       <h1 class="p-4 text-lg">Altar Item Floors</h1>
       <div class="flex w-full justify-around">
-        <ItemCard img={chest} alt="a treasure chest" price={chestPrice} />
-        <ItemCard img={air} alt="air rune" price={airPrice} />
-        <ItemCard img={earth} alt="earth rune" price={earthPrice} />
-        <ItemCard img={water} alt="water rune" price={waterPrice} />
-        <ItemCard img={fire} alt="fire rune" price={firePrice} />
+        <ItemCard
+          img={chest}
+          alt="a treasure chest"
+          price={chestPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/5"
+        />
+        <ItemCard
+          img={air}
+          alt="air rune"
+          price={airPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/1"
+        />
+        <ItemCard
+          img={earth}
+          alt="earth rune"
+          price={earthPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/2"
+        />
+        <ItemCard
+          img={water}
+          alt="water rune"
+          price={waterPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/3"
+        />
+        <ItemCard
+          img={fire}
+          alt="fire rune"
+          price={firePrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/4"
+        />
       </div>
     </div>
   );
