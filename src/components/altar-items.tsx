@@ -81,7 +81,7 @@ const AltarItems = () => {
       style={containerStyles}
     >
       <h1 class="p-4 text-lg">Altar Item Floors</h1>
-      <div class="flex w-full justify-around">
+      <div class="flex w-full justify-center">
         <ItemCard
           img={magic}
           alt="a magic rune"
@@ -107,7 +107,7 @@ const AltarItems = () => {
           url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/3"
         />
       </div>
-      <div class="flex w-full justify-around">
+      <div class="flex w-full justify-center">
         <ItemCard
           img={fire}
           alt="fire rune"

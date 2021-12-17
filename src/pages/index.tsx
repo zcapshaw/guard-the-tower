@@ -19,7 +19,7 @@ const IndexPage = () => {
     <Layout pageTitle="!guard">
       <div class="text-center">
         <h1 class="mt-10 mb-4 text-3xl">!GUARD THE TOWER</h1>
-        <p class="mb-4">A dashboard for Wizards & Dragons Game</p>
+        <p class="mb-4 mx-4">A dashboard for Wizards & Dragons Game</p>
         <h1 class="text-6xl mb-8">🧙‍♂️🐉</h1>
       </div>
 

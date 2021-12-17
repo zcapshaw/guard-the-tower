@@ -134,7 +134,7 @@ const CardGrid = () => {
 
   return (
     <div>
-      <div class="flex justify-center w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
+      <div class="flex flex-col justify-center items-center md:flex-row w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 m-auto">
         <DataCard
           img={gen1}
           title="Gen 1 Wizard Floor"
