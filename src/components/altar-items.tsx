@@ -99,6 +99,20 @@ const AltarItems = () => {
           url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/4"
         />
       </div>
+      <div class="flex w-full justify-around">
+        <ItemCard
+          img={chest}
+          alt="a treasure chest"
+          price={chestPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/5"
+        />
+        <ItemCard
+          img={air}
+          alt="air rune"
+          price={airPrice}
+          url="https://opensea.io/assets/0xfa1a07056c48dcba4b5e9e71aacc6aa791a93929/1"
+        />
+      </div>
     </div>
   );
 };

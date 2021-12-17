@@ -1,15 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import {
+  query,
+  orderBy,
+  limit,
+  addDoc,
+  getFirestore,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import Web3 from "web3/dist/web3.min.js";
 
 import { DataCard } from "./data-card";
 import gen0 from "../images/gen0-wizard.png";
 import gen1 from "../images/gen1-wizard.png";
 
+// Initialize Cloud Firestore through Firebase
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: "guard-the-tower.firebaseapp.com",
+  projectId: "guard-the-tower",
+  storageBucket: "guard-the-tower.appspot.com",
+  messagingSenderId: "651790840617",
+  appId: "1:651790840617:web:686eef7a004db7b50ebd38",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore();
+
 const CardGrid = () => {
   const [floorPrice, setFloorPrice] = useState("-");
   const [gpPrice, setGpPrice] = useState("-");
   const [gpDisplayPrice, setGpDisplayPrice] = useState("-");
   const [ethPrice, setEthPrice] = useState(0);
+  const [gen0WizardFloor, setGen0WizardFloor] = useState("-");
 
   const isBrowser = typeof window !== "undefined";
 
@@ -44,7 +70,8 @@ const CardGrid = () => {
 
     // set the cost to mint a wizard based on current ETH and GP prices
     fetchFloorData();
-  }, [gpPrice, ethPrice, floorPrice]);
+    fetchFirestoreData();
+  }, [gpPrice, ethPrice, floorPrice, gen0WizardFloor]);
 
   const fetchFloorData = () => {
     fetch(
@@ -54,6 +81,16 @@ const CardGrid = () => {
       .then((resultData) => {
         setFloorPrice(resultData.stats.floor_price.toFixed(3));
       });
+  };
+
+  const fetchFirestoreData = async () => {
+    const floorsRef = collection(db, "dragon_floors");
+    const q = query(floorsRef, orderBy("timestamp", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      setGen0WizardFloor(doc.data().gen0_wizard_floor);
+    });
   };
 
   // const fetchTotalTokenCount = async () => {
@@ -109,7 +146,7 @@ const CardGrid = () => {
         <DataCard
           img={gen0}
           title="Gen 0 Wizard Floor"
-          number={floorPrice}
+          number={gen0WizardFloor}
           currency="ETH"
           footer="OpenSea"
           footerUrl="https://opensea.io/collection/wizards-dragons-game-v2?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=Generation&search[stringTraits][0][values][0]=Gen%200&search[toggles][0]=BUY_NOW"
